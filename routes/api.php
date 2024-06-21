@@ -75,3 +75,5 @@ require __DIR__ . "/moviesApi.php";
 require __DIR__ . "/siteApi.php";
 
 require __DIR__ . "/articleApi.php";
+
+require __DIR__ . "/miniListApi.php";

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    public function showArticle($slug)
+    public function showArtigo($slug)
     {
         $data = Article::where('slug', $slug)->firstOrFail();
 
