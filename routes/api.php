@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SiteController;
 use App\Http\Requests\AdicionaFilmeRequest;
 use App\Http\Requests\RemoverFilmeRequest;
 use App\Models\ListaDoUsuario;
@@ -20,6 +21,13 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::get('/home', [SiteController::class, 'getHomeData']);
+Route::get('/article-suggestions', [SiteController::class, 'getArticleSuggestions']);
+Route::get('/lists-suggestions', [SiteController::class, 'getListsSuggestions']);
+Route::get('/top100-suggestions', [SiteController::class, 'getTop100Suggestions']);
+Route::get('/best-movies-of-last-year', [SiteController::class, 'getBestMoviesOfLastYear']);
+
 
 Route::middleware('auth:sanctum')->group(function () {
 
