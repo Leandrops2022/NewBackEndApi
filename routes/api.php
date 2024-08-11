@@ -28,60 +28,62 @@ Route::get('/lists-suggestions', [SiteController::class, 'getListsSuggestions'])
 Route::get('/top100-suggestions', [SiteController::class, 'getTop100Suggestions']);
 Route::get('/best-movies-of-last-year', [SiteController::class, 'getBestMoviesOfLastYear']);
 
+Route::post('/auto-complete', [SiteController::class, 'getAutoComplete']);
 
-Route::middleware('auth:sanctum')->group(function () {
 
-    // Route::post('/adicionaFilmeNaLista', function (AdicionaFilmeRequest $request) {
+// Route::middleware('auth:sanctum')->group(function () {
 
-    //     $idLista = $request->input('id_lista');
+// Route::post('/adicionaFilmeNaLista', function (AdicionaFilmeRequest $request) {
 
-    //     $quantidadeLista = RelacionamentoListaFilme::where('id_lista', $idLista)->count();
+//     $idLista = $request->input('id_lista');
 
-    //     if ($quantidadeLista == 100) {
-    //         return response()->json("Você só pode adicionar 100 filmes na lista", 403);
-    //     }
+//     $quantidadeLista = RelacionamentoListaFilme::where('id_lista', $idLista)->count();
 
-    //     $adicoes = $request->input('lista');
+//     if ($quantidadeLista == 100) {
+//         return response()->json("Você só pode adicionar 100 filmes na lista", 403);
+//     }
 
-    //     $now = Carbon::now();
+//     $adicoes = $request->input('lista');
 
-    //     $valuesToInsert = [];
+//     $now = Carbon::now();
 
-    //     foreach ($adicoes as $elemento) {
+//     $valuesToInsert = [];
 
-    //         $valuesToInsert[] = [
-    //             'id_lista' => $idLista,
-    //             'id_filme' => $elemento,
-    //             'created_at' => $now,
-    //             'updated_at' => $now,
-    //         ];
-    //     }
+//     foreach ($adicoes as $elemento) {
 
-    //     $listaDoUsuario = RelacionamentoListaFilme::insertOrIgnore($valuesToInsert);
+//         $valuesToInsert[] = [
+//             'id_lista' => $idLista,
+//             'id_filme' => $elemento,
+//             'created_at' => $now,
+//             'updated_at' => $now,
+//         ];
+//     }
 
-    //     return response()->json($listaDoUsuario, 201);
-    // });
+//     $listaDoUsuario = RelacionamentoListaFilme::insertOrIgnore($valuesToInsert);
 
-    // Route::delete('/removerFilme/{id}', function (Request $request) {
-    //     $idUsuario =  $request->user()->id;
-    //     $idFilme =  $request->id;
-    //     $listaDoUsuario = ListaDoUsuario::where('id_usuario', $idUsuario)->get();
-    //     $idLista = $listaDoUsuario[0]->id;
+//     return response()->json($listaDoUsuario, 201);
+// });
 
-    //     RelacionamentoListaFilme::where([
-    //         'id_lista' => $idLista,
-    //         'id_filme' => $idFilme,
-    //     ])->delete();
+// Route::delete('/removerFilme/{id}', function (Request $request) {
+//     $idUsuario =  $request->user()->id;
+//     $idFilme =  $request->id;
+//     $listaDoUsuario = ListaDoUsuario::where('id_usuario', $idUsuario)->get();
+//     $idLista = $listaDoUsuario[0]->id;
 
-    //     return response()->noContent();
-    // });
+//     RelacionamentoListaFilme::where([
+//         'id_lista' => $idLista,
+//         'id_filme' => $idFilme,
+//     ])->delete();
 
-});
+//     return response()->noContent();
+// });
+
+// });
 
 require __DIR__ . "/moviesApi.php";
-
-require __DIR__ . "/siteApi.php";
 
 require __DIR__ . "/articleApi.php";
 
 require __DIR__ . "/miniListApi.php";
+
+require __DIR__ . "/top100Api.php";

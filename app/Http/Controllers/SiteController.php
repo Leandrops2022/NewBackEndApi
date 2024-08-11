@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Actor;
 use App\Models\BestMoviesOfLastYear;
 use App\Models\Destaques;
+use App\Models\Movie;
 use App\Models\SugestoesDeArtigos;
 use App\Models\SugestoesDeMiniListas;
 use App\Models\SugestoesDeTop100;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SiteController extends Controller
 {
@@ -50,5 +53,21 @@ class SiteController extends Controller
             ->paginate(10);
 
         return response()->json($list);
+    }
+
+    public function getAutoComplete(Request $request)
+    {
+        $textQuery = $request->input('textQuery');
+        $textQuery = '%' . $textQuery . '%'; // Add wildcards for partial matching
+
+        // Define the queries for each table
+        $moviesQuery = DB::table('filmes')
+            ->select('titulo_portugues as nome')
+            ->where('titulo_portugues', 'LIKE', $textQuery)
+            ->limit(5)
+            ->pluck('nome')
+            ->toArray();
+
+        return response()->json($moviesQuery);
     }
 }
