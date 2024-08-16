@@ -55,19 +55,41 @@ class SiteController extends Controller
         return response()->json($list);
     }
 
+    // public function getAutoComplete(Request $request)
+    // {
+    //     $textQuery = $request->input('textQuery');
+    //     $textQuery = '%' . $textQuery . '%'; // Add wildcards for partial matching
+
+    //     // Define the queries for each table
+    //     $moviesQuery = DB::table('filmes')
+    //         ->select('titulo_portugues as nome')
+    //         ->where('titulo_portugues', 'LIKE', $textQuery)
+    //         ->limit(5)
+    //         ->pluck('nome')
+    //         ->toArray();
+
+    //     return response()->json($moviesQuery);
+    // }
     public function getAutoComplete(Request $request)
     {
         $textQuery = $request->input('textQuery');
         $textQuery = '%' . $textQuery . '%'; // Add wildcards for partial matching
 
-        // Define the queries for each table
-        $moviesQuery = DB::table('filmes')
-            ->select('titulo_portugues as nome')
-            ->where('titulo_portugues', 'LIKE', $textQuery)
-            ->limit(5)
+        // Perform a single query to fetch both movies and actors, removing special characters
+        $results = DB::table(DB::raw("( 
+            SELECT titulo_portugues AS nome 
+            FROM filmes 
+            WHERE titulo_portugues LIKE ? AND titulo_portugues NOT REGEXP '^[^a-zA-Z0-9]' 
+            UNION 
+            SELECT nome 
+            FROM atores 
+            WHERE nome LIKE ? AND nome NOT REGEXP '^[^a-zA-Z0-9]' 
+        ) AS combined"))
+            ->setBindings([$textQuery, $textQuery])
+            ->limit(10) // Adjust the limit as needed
             ->pluck('nome')
             ->toArray();
 
-        return response()->json($moviesQuery);
+        return response()->json($results);
     }
 }
