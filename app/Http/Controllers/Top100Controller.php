@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Top100Request;
 use App\Models\Top100Action;
 use App\Models\Top100Adventure;
 use App\Models\Top100Animation;
@@ -23,6 +22,7 @@ use App\Models\Top100Thriller;
 use App\Models\Top100War;
 use App\Models\Top100Western;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class Top100Controller extends Controller
 {
@@ -33,11 +33,22 @@ class Top100Controller extends Controller
         return response()->json($suggestions);
     }
 
-    public function show(Top100Request $request)
+    public function show($slug)
     {
-        $validated = $request->validated();
+        $validator = Validator::make(['top100Name' => $slug], [
+            'top100Name' => ['required', 'string', 'in:ação,aventura,animação,clássícos,comédia,crime,drama,família,fantasia,terror,musical,mistério,romance,ficção-científica,suspense,guerra,faroeste,geral'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json("The resource you're looking for was not found", 404);
+        }
+
         try {
-            $model = $this->getModel($validated['top100Name']);
+            $model = $this->getModel($slug);
+
+            $data = $model::all();
+
+            return response()->json($data);
         } catch (\Exception $e) {
             Log::error('Error: '.$e->getMessage().'in'.$e->getFile().'on line: '.$e->getLine());
 
@@ -71,5 +82,4 @@ class Top100Controller extends Controller
 
         return $modelMapping[$slug];
     }
-
 }

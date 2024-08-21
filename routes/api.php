@@ -1,11 +1,6 @@
 <?php
 
 use App\Http\Controllers\SiteController;
-use App\Http\Requests\AdicionaFilmeRequest;
-use App\Models\ListaDoUsuario;
-use App\Models\RelacionamentoListaFilme;
-use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,9 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/home', [SiteController::class, 'getHomeData']);
-Route::get('/article-suggestions', [SiteController::class, 'getArticleSuggestions']);
-Route::get('/lists-suggestions', [SiteController::class, 'getListsSuggestions']);
-Route::get('/top100-suggestions', [SiteController::class, 'getTop100Suggestions']);
 Route::get('/best-movies-of-last-year', [SiteController::class, 'getBestMoviesOfLastYear']);
 
 Route::post('/auto-complete', [SiteController::class, 'getAutoComplete']);
