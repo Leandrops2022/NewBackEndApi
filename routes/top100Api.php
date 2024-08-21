@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\MovieController;
 use App\Http\Controllers\Top100Controller;
 use Illuminate\Support\Facades\Route;
 
@@ -56,10 +55,8 @@ Route::group([
     Route::get('/top100Misterio', [Top100Controller::class, 'showTop100Misterio'])
         ->name('movie.top100Misterio');
 
-
     Route::get('/top100Geral', [Top100Controller::class, 'showTop100Geral'])
         ->name('movie.top100Geral');
-
 
     Route::get('/top100FilmesClassicos', [Top100Controller::class, 'showTop100FilmesClassicos'])
         ->name('movie.top100FilmesClassicos');

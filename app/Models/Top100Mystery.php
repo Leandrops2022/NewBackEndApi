@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Top100Fantasia extends Model
+class Top100Mystery extends Model
 {
     use HasFactory;
 
-    protected $table = 'top100fantasia';
+    protected $table = 'top100misterio';
 }

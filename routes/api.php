@@ -2,14 +2,11 @@
 
 use App\Http\Controllers\SiteController;
 use App\Http\Requests\AdicionaFilmeRequest;
-use App\Http\Requests\RemoverFilmeRequest;
 use App\Models\ListaDoUsuario;
 use App\Models\RelacionamentoListaFilme;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +26,6 @@ Route::get('/top100-suggestions', [SiteController::class, 'getTop100Suggestions'
 Route::get('/best-movies-of-last-year', [SiteController::class, 'getBestMoviesOfLastYear']);
 
 Route::post('/auto-complete', [SiteController::class, 'getAutoComplete']);
-
 
 // Route::middleware('auth:sanctum')->group(function () {
 
@@ -80,10 +76,10 @@ Route::post('/auto-complete', [SiteController::class, 'getAutoComplete']);
 
 // });
 
-require __DIR__ . "/moviesApi.php";
+require __DIR__.'/moviesApi.php';
 
-require __DIR__ . "/articleApi.php";
+require __DIR__.'/articleApi.php';
 
-require __DIR__ . "/miniListApi.php";
+require __DIR__.'/miniListApi.php';
 
-require __DIR__ . "/top100Api.php";
+require __DIR__.'/top100Api.php';

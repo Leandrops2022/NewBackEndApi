@@ -6,5 +6,5 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'prefix' => 'filme',
 ], function () {
-    Route::get('/{slug}', [MovieController::class, 'getMovieDetails']);
+    Route::get('/{slug}', [MovieController::class, 'show']);
 });

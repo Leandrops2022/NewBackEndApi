@@ -2,25 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\MovieDetailsRequest;
-use App\Models\MovieDetails;
-use Illuminate\Http\Response;
+use App\Models\MovieDetail;
 
 class MovieController extends Controller
 {
-    public function getMovieDetails($slug)
+    public function show($slug)
     {
-        if (!isset($slug)) {
+        if (! isset($slug)) {
             return response()->json([
-                'message' => 'Você deve informar o nome de algum filme'
+                'message' => 'Você deve informar o nome de algum filme',
             ], 422);
         }
 
-        $movieData = MovieDetails::where('slug', $slug)->first();
+        $movieData = MovieDetail::where('slug', $slug)->first();
 
         $emptyMovieData = [
             true  => response()->json(['message' => 'Não encontrado'], 404),
-            false => response()->json($movieData)
+            false => response()->json($movieData),
         ];
 
         return $emptyMovieData[empty($movieData)];
