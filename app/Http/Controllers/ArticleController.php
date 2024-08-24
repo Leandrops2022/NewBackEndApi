@@ -2,22 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
-use App\Models\ArticleHighlights;
+use App\Http\Interfaces\ArticleRepositoryInterface;
 
 class ArticleController extends Controller
 {
+    public function __construct(public ArticleRepositoryInterface $repository) {}
+
+    public function index()
+    {
+        return response()->json($this->repository->getAllArticles());
+    }
+
     public function show($slug)
     {
-        $data = Article::where('slug', $slug)->firstOrFail();
+        $data = $this->repository->getArticleAndHighlights($slug);
 
-        return response()->json($data);
+        return response()->json($data, 200);
     }
 
     public function highlights()
     {
-        $suggestions = ArticleHighlights::inRandomOrder()->limit(4)->get();
-
-        return response()->json($suggestions);
+        return response()->json($this->repository->getArticleHighlights());
     }
 }

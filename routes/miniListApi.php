@@ -13,6 +13,6 @@ Route::group([
     Route::get('/', [MiniListController::class, 'index'])
         ->name('minilista.index');
 
-    Route::get('/show/{slug}', [MiniListController::class, 'show'])
+    Route::get('/{slug}', [MiniListController::class, 'show'])
         ->name('minilista.show');
 });

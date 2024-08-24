@@ -2,22 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MiniList;
-use App\Models\MinilistHighlights;
+use App\Services\HandleErrorService;
+use App\Services\MiniListService;
+use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Log;
 
 class MiniListController extends Controller
 {
+    public function __construct(protected MiniListService $miniListService, protected HandleErrorService $handleErrorService)
+    {
+
+    }
+
+    public function index(): LengthAwarePaginator
+    {
+        $data = $this->miniListService->getAllMiniLists();
+        return $data;
+    }
+
     public function show($slug)
     {
-        $data = MiniList::where('slug', $slug)->firstOrFail();
+        try {
+            $data = $this->miniListService->getMiniListAndHighlights($slug);
+            return response()->json($data, 200);
+        } catch (ModelNotFoundException) {
+            return response()->json([
+                "error" => "The resource you're looking for could not be found"
+            ], 404);
+        } catch (Exception $e) {
+            $message = $this->handleErrorService->handleError($e);
+            return response()->json($message,500);
+        }
 
-        return response()->json($data);
     }
 
-    public function highlights()
-    {
-        $suggestions = MinilistHighlights::inRandomOrder()->limit(4)->get();
-
-        return response()->json($suggestions);
-    }
 }

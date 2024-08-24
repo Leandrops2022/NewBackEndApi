@@ -9,7 +9,7 @@ Route::group([
 
     Route::get('/highLights', [ArticleController::class, 'highlights']);
 
-    Route::get('/', [ArticleController::class, 'index'])
+    Route::get('/index', [ArticleController::class, 'index'])
         ->name('artigo.index');
 
     Route::get('/{slug}', [ArticleController::class, 'show'])
