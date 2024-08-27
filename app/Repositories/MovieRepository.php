@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Repositories;
+namespace App\Repositories;
 
-use App\Interfaces\MovieRepositoryInterface;
+use App\Contracts\Repositories\MovieRepositoryInterface;
 use App\Models\Movie;
 use Illuminate\Database\Eloquent\Collection;
 

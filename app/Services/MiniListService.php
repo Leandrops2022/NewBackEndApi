@@ -2,12 +2,12 @@
 
 namespace App\Services;
 
-use App\Interfaces\MiniListRepositoryInterface;
-use App\Interfaces\MovieRepositoryInterface;
-use Illuminate\Database\Eloquent\Collection;
+use App\Contracts\Repositories\MiniListRepositoryInterface;
+use App\Contracts\Repositories\MovieRepositoryInterface;
+use App\Contracts\Services\MiniListServiceInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class MiniListService
+class MiniListService implements MiniListServiceInterface
 {
     public function __construct(
         protected MiniListRepositoryInterface $miniListRepository,

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces;
+namespace App\Contracts\Repositories;
 
 use App\Models\MiniList;
 use Illuminate\Database\Eloquent\Collection;

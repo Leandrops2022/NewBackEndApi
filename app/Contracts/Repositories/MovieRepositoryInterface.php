@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces;
+namespace App\Contracts\Repositories;
 
 use App\Models\Movie;
 use Illuminate\Database\Eloquent\Collection;

@@ -7,8 +7,6 @@ Route::group([
     'prefix' => 'artigo',
 ], function () {
 
-    Route::get('/highLights', [ArticleController::class, 'highlights']);
-
     Route::get('/index', [ArticleController::class, 'index'])
         ->name('artigo.index');
 

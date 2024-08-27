@@ -2,9 +2,10 @@
 
 namespace App\Services;
 
+use App\Contracts\Services\HandleErrorServiceInterface;
 use Illuminate\Support\Facades\Log;
 
-class HandleErrorService
+class HandleErrorService implements HandleErrorServiceInterface
 {
     public function handleError($e): string
     {

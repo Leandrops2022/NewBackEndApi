@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces;
+namespace App\Contracts\Repositories;
 
 use App\Models\Article;
 use Illuminate\Database\Eloquent\Collection;
@@ -14,5 +14,4 @@ interface ArticleRepositoryInterface
 
     public function getArticleHighlights(): Collection;
 
-    public function getArticleAndHighlights($slug): array;
 }

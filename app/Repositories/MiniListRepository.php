@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Repositories;
+namespace App\Repositories;
 
-use App\Interfaces\MiniListRepositoryInterface;
+use App\Contracts\Repositories\MiniListRepositoryInterface;
 use App\Models\MiniList;
 use App\Models\MiniListHighlights;
 use Illuminate\Database\Eloquent\Collection;

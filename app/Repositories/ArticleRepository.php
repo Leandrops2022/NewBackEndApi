@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Repositories;
+namespace App\Repositories;
 
-use App\Interfaces\ArticleRepositoryInterface;
+use App\Contracts\Repositories\ArticleRepositoryInterface;
 use App\Models\Article;
 use App\Models\ArticleHighlights;
 use Illuminate\Database\Eloquent\Collection;
@@ -20,7 +20,7 @@ class ArticleRepository implements ArticleRepositoryInterface
 
     public function getAllArticles(): LengthAwarePaginator
     {
-        return Article::orderBy('created_at')->paginate(10);
+        return Article::select('imagem_capa', 'alt_capa', 'titulo', 'texto', 'trailer')->orderBy('created_at')->paginate(10);
     }
 
     /**
@@ -32,26 +32,5 @@ class ArticleRepository implements ArticleRepositoryInterface
 
         return $highlights;
 
-    }
-
-    public function getArticleAndHighlights($slug): array
-    {
-        $article    = $this->getArticle($slug);
-        $highlights = $this->getArticleHighlights();
-
-        $articleData = [
-            'imgSrc'  => $article->imagem_capa,
-            'imgAlt'  => $article->alt_capa,
-            'title'   => $article->titulo,
-            'content' => $article->texto,
-            'trailer' => $article->trailer,
-        ];
-
-        $data = [
-            'content'       => $articleData,
-            'highlights'    => $highlights,
-        ];
-
-        return $data;
     }
 }

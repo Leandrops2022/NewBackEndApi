@@ -2,26 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Services\ArticleServiceInterface;
 use App\Http\Interfaces\ArticleRepositoryInterface;
 
 class ArticleController extends Controller
 {
-    public function __construct(public ArticleRepositoryInterface $repository) {}
+    public function __construct(protected ArticleServiceInterface $articleService) {}
 
     public function index()
     {
-        return response()->json($this->repository->getAllArticles());
+        return response()->json($this->articleService->getAllArticles());
     }
 
     public function show($slug)
     {
-        $data = $this->repository->getArticleAndHighlights($slug);
+        $data = $this->articleService->getArticleAndHighlights($slug);
 
         return response()->json($data, 200);
     }
 
-    public function highlights()
-    {
-        return response()->json($this->repository->getArticleHighlights());
-    }
+
 }

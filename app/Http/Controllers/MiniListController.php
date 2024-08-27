@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\HandleErrorService;
-use App\Services\MiniListService;
+use App\Contracts\Services\HandleErrorServiceInterface;
+use App\Contracts\Services\MiniListServiceInterface;
+
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 
 class MiniListController extends Controller
 {
-    public function __construct(protected MiniListService $miniListService, protected HandleErrorService $handleErrorService)
+    public function __construct(protected MiniListServiceInterface $miniListService, protected HandleErrorServiceInterface $handleErrorService)
     {
 
     }
