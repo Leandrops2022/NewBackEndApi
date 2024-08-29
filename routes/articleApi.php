@@ -4,13 +4,13 @@ use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
-    'prefix' => 'artigo',
+    'prefix' => 'article',
 ], function () {
 
     Route::get('/index', [ArticleController::class, 'index'])
-        ->name('artigo.index');
+        ->name('article.index');
 
     Route::get('/{slug}', [ArticleController::class, 'show'])
-        ->name('artigo.show');
+        ->name('article.show');
 
 });

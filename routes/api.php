@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\SiteController;
-use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,65 +10,16 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+require __DIR__.'/authApi.php';
 
-Route::get('/home', [SiteController::class, 'getHomeData']);
-Route::get('/melhores-filmes-do-ano-passado', [SiteController::class, 'getBestMoviesOfLastYear']);
-
-Route::post('/auto-complete', [SiteController::class, 'getAutoComplete']);
-
-// Route::middleware('auth:sanctum')->group(function () {
-
-// Route::post('/adicionaFilmeNaLista', function (AdicionaFilmeRequest $request) {
-
-//     $idLista = $request->input('id_lista');
-
-//     $quantidadeLista = RelacionamentoListaFilme::where('id_lista', $idLista)->count();
-
-//     if ($quantidadeLista == 100) {
-//         return response()->json("Você só pode adicionar 100 filmes na lista", 403);
-//     }
-
-//     $adicoes = $request->input('lista');
-
-//     $now = Carbon::now();
-
-//     $valuesToInsert = [];
-
-//     foreach ($adicoes as $elemento) {
-
-//         $valuesToInsert[] = [
-//             'id_lista' => $idLista,
-//             'id_filme' => $elemento,
-//             'created_at' => $now,
-//             'updated_at' => $now,
-//         ];
-//     }
-
-//     $listaDoUsuario = RelacionamentoListaFilme::insertOrIgnore($valuesToInsert);
-
-//     return response()->json($listaDoUsuario, 201);
-// });
-
-// Route::delete('/removerFilme/{id}', function (Request $request) {
-//     $idUsuario =  $request->user()->id;
-//     $idFilme =  $request->id;
-//     $listaDoUsuario = ListaDoUsuario::where('id_usuario', $idUsuario)->get();
-//     $idLista = $listaDoUsuario[0]->id;
-
-//     RelacionamentoListaFilme::where([
-//         'id_lista' => $idLista,
-//         'id_filme' => $idFilme,
-//     ])->delete();
-
-//     return response()->noContent();
-// });
-
-// });
+require __DIR__.'/siteApi.php';
 
 require __DIR__.'/moviesApi.php';
 
 require __DIR__.'/articleApi.php';
 
-require __DIR__.'/miniListApi.php';
+require __DIR__.'/tinyListApi.php';
 
 require __DIR__.'/top100Api.php';
+
+require __DIR__.'/actorApi.php';

@@ -5,9 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MiniList extends Model
+class TinyList extends Model
 {
     use HasFactory;
-
-    protected $table = 'minilista';
 }

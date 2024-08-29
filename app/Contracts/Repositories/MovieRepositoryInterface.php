@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface MovieRepositoryInterface
 {
-
     public function getMovie($slug): Movie;
 
     public function getMoviesByIds(array $ids): Collection;

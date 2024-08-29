@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Services\ArticleServiceInterface;
-use App\Http\Interfaces\ArticleRepositoryInterface;
 
 class ArticleController extends Controller
 {
@@ -20,6 +19,4 @@ class ArticleController extends Controller
 
         return response()->json($data, 200);
     }
-
-
 }

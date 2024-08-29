@@ -7,6 +7,6 @@ use Illuminate\Pagination\LengthAwarePaginator;
 interface ArticleServiceInterface
 {
     public function getArticleAndHighlights($slug): array;
-    public function getAllArticles(): LengthAwarePaginator;
 
+    public function getAllArticles(): LengthAwarePaginator;
 }

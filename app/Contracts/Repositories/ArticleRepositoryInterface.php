@@ -13,5 +13,4 @@ interface ArticleRepositoryInterface
     public function getAllArticles(): LengthAwarePaginator;
 
     public function getArticleHighlights(): Collection;
-
 }

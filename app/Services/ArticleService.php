@@ -10,11 +10,11 @@ class ArticleService implements ArticleServiceInterface
 {
     public function __construct(
         protected ArticleRepositoryInterface $articleRepository,
-    ){}
+    ) {}
 
     public function getArticleAndHighlights($slug): array
     {
-        $article = $this->articleRepository->getArticle($slug);
+        $article    = $this->articleRepository->getArticle($slug);
         $highlights = $this->articleRepository->getArticleHighlights();
 
         $content = [
@@ -22,7 +22,7 @@ class ArticleService implements ArticleServiceInterface
             'imgAlt'  => $article->alt_capa,
             'title'   => $article->titulo,
             'content' => $article->texto,
-            'trailer' => $article->trailer
+            'trailer' => $article->trailer,
         ];
 
         $data = [
@@ -36,7 +36,7 @@ class ArticleService implements ArticleServiceInterface
     public function getAllArticles(): LengthAwarePaginator
     {
         $articles = $this->getAllArticles();
+
         return $articles;
     }
-
 }
