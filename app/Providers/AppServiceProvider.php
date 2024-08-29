@@ -2,18 +2,20 @@
 
 namespace App\Providers;
 
+use App\Contracts\ActorRepositoryInterface;
 use App\Contracts\Repositories\ArticleRepositoryInterface;
-use App\Contracts\Repositories\MiniListRepositoryInterface;
 use App\Contracts\Repositories\MovieRepositoryInterface;
+use App\Contracts\Repositories\TinyListRepositoryInterface;
 use App\Contracts\Services\ArticleServiceInterface;
 use App\Contracts\Services\HandleErrorServiceInterface;
-use App\Contracts\Services\MiniListServiceInterface;
+use App\Contracts\Services\TinyListServiceInterface;
+use App\Repositories\ActorRepository;
 use App\Repositories\ArticleRepository;
-use App\Repositories\MiniListRepository;
 use App\Repositories\MovieRepository;
+use App\Repositories\TinyListRepository;
 use App\Services\ArticleService;
 use App\Services\HandleErrorService;
-use App\Services\MiniListService;
+use App\Services\TinyListService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,11 +26,12 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(ArticleRepositoryInterface::class, ArticleRepository::class);
-        $this->app->bind(MiniListRepositoryInterface::class, MiniListRepository::class);
+        $this->app->bind(TinyListRepositoryInterface::class, TinyListRepository::class);
         $this->app->bind(MovieRepositoryInterface::class, MovieRepository::class);
         $this->app->bind(ArticleServiceInterface::class, ArticleService::class);
-        $this->app->bind(MiniListServiceInterface::class, MiniListService::class);
+        $this->app->bind(TinyListServiceInterface::class, TinyListService::class);
         $this->app->bind(HandleErrorServiceInterface::class, HandleErrorService::class);
+        $this->app->bind(ActorRepositoryInterface::class, ActorRepository::class);
 
     }
 
