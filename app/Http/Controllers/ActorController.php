@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\ActorRepositoryInterface;
+use App\Contracts\Repositories\ActorRepositoryInterface;
 use App\Http\Requests\StoreActorRequest;
 use App\Http\Requests\UpdateActorRequest;
 use App\Models\Actor;
@@ -19,6 +19,7 @@ class ActorController extends Controller
 
     public function store(StoreActorRequest $request)
     {
+        dd('test');
         $validatedData = $request->validated();
 
         try {

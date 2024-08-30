@@ -21,6 +21,7 @@ class StoreActorRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
             'id'                   => 'required|integer',
             'name'                 => 'required|string|max:255',

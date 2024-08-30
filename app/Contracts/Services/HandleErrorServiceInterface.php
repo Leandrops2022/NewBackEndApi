@@ -4,5 +4,5 @@ namespace App\Contracts\Services;
 
 interface HandleErrorServiceInterface
 {
-    public function handleError($e): string;
+    public function handleError($e): array;
 }

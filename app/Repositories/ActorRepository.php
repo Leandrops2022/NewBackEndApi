@@ -2,12 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Contracts\ActorRepositoryInterface;
+use App\Contracts\Repositories\ActorRepositoryInterface;
 use App\Models\Actor;
-use App\Models\Article;
-use App\Models\ArticleHighlights;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class ActorRepository implements ActorRepositoryInterface
 {
