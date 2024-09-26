@@ -11,15 +11,10 @@ use Illuminate\Support\Facades\Log;
 
 class ActorController extends Controller
 {
-
-    public function __construct(protected ActorRepositoryInterface $actorRepository)
-    {
-
-    }
+    public function __construct(protected ActorRepositoryInterface $actorRepository) {}
 
     public function store(StoreActorRequest $request)
     {
-        dd('test');
         $validatedData = $request->validated();
 
         try {
@@ -44,12 +39,10 @@ class ActorController extends Controller
         //
     }
 
-
     public function edit(Actor $actor)
     {
         //
     }
-
 
     public function update(UpdateActorRequest $request, Actor $actor)
     {

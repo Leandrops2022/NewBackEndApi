@@ -3,12 +3,10 @@
 use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/home', [SiteController::class, 'home']);
 
+Route::get('/melhores-filmes-do-ano-passado', [SiteController::class, 'bestOfLastYear']);
 
-Route::get('/home', [SiteController::class, 'getHomeData']);
+Route::get('/melhores-por-genero', [SiteController::class, 'top100List']);
 
-Route::get('/best-movies-of-last-year', [SiteController::class, 'getBestMoviesOfLastYear']);
-
-Route::post('/auto-complete', [SiteController::class, 'getAutoComplete']);
-
-
+Route::post('/auto-complete', [SiteController::class, 'autoComplete']);

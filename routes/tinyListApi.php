@@ -4,7 +4,7 @@ use App\Http\Controllers\TinyListController;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
-    'prefix' => 'tinyList',
+    'prefix' => 'minilista',
 ], function () {
 
     Route::get('/highlights', [TinyListController::class, 'highlights'])

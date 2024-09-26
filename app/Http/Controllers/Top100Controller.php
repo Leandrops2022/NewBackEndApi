@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Top100Name;
 use App\Models\Top100Action;
 use App\Models\Top100Adventure;
 use App\Models\Top100Animation;
@@ -22,7 +23,6 @@ use App\Models\Top100Thriller;
 use App\Models\Top100War;
 use App\Models\Top100Western;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
 
 class Top100Controller extends Controller
 {
@@ -35,11 +35,7 @@ class Top100Controller extends Controller
 
     public function show($slug)
     {
-        $validator = Validator::make(['top100Name' => $slug], [
-            'top100Name' => ['required', 'string', 'in:ação,aventura,animação,clássícos,comédia,crime,drama,família,fantasia,terror,musical,mistério,romance,ficção-científica,suspense,guerra,faroeste,geral'],
-        ]);
-
-        if ($validator->fails()) {
+        if (! Top100Name::tryFrom($slug)) {
             return response()->json("The resource you're looking for was not found", 404);
         }
 

@@ -4,6 +4,7 @@ namespace App\Contracts\Repositories;
 
 use App\Models\Movie;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 interface MovieRepositoryInterface
 {
@@ -11,7 +12,7 @@ interface MovieRepositoryInterface
 
     public function getMoviesByIds(array $ids): Collection;
 
-    // public function getMovieHighlights(): Collection;
+    public function getMovieHighlights(): Collection;
 
-    // public function getMovieAndHighlights($slug): array;
+    public function getMoviesByName($movieName): LengthAwarePaginator;
 }

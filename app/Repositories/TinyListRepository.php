@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Contracts\Repositories\TinyListRepositoryInterface;
 use App\Models\TinyList;
+use App\Models\TinyListHighlight;
 use App\Models\TinyListHighlights;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -30,7 +31,7 @@ class TinyListRepository implements TinyListRepositoryInterface
      */
     public function getTinyListHighlights(): Collection
     {
-        $highlights = TinyList::inRandomOrder()->limit(4)->get();
+        $highlights = TinyListHighlight::inRandomOrder()->limit(4)->get();
 
         return $highlights;
 

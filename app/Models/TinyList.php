@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class TinyList extends Model
 {
     use HasFactory;
+
+    protected $table = 'minilista';
 }

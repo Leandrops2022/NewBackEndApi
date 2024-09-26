@@ -12,8 +12,9 @@ class HandleErrorService implements HandleErrorServiceInterface
         Log::error('Error: '.$e->getMessage().' in '.$e->getFile().' on line'.$e->getLine());
 
         $message = $e->getMessage();
+
         return [
-            "message" => $message
+            'message' => $message,
         ];
     }
 }

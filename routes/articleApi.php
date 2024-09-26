@@ -4,7 +4,7 @@ use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
-    'prefix' => 'article',
+    'prefix' => 'artigo',
 ], function () {
 
     Route::get('/index', [ArticleController::class, 'index'])

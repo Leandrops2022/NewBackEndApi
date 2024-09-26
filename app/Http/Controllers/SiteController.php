@@ -2,34 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BestMoviesOfLastYear;
-use App\Models\GeneralHighlights;
+use App\Contracts\Services\SiteServiceInterface;
+use App\Models\Top100Highlights;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class SiteController extends Controller
 {
-    public function getHomeData()
+    public function __construct(private SiteServiceInterface $siteService) {}
+
+    public function home()
     {
-        $highlights = GeneralHighlights::inRandomOrder()->limit(8)->get();
+        $highlights = $this->siteService->getHomepageData();
 
-        $data = [
-            'highlights' => $highlights,
-        ];
-
-        return $data;
+        return response()->json($highlights);
     }
 
-    public function getBestMoviesOfLastYear()
+    public function bestOfLastYear()
     {
-        $list = BestMoviesOfLastYear::select('titulo_portugues', 'rank', 'poster', 'duracao', 'ano_lancamento', 'nota', 'tagline', 'slug', 'genero')
-            ->orderBy('rank', 'desc')
-            ->paginate(10);
+        $list = $this->siteService->getBestMoviesOfLastYear();
 
         return response()->json($list);
     }
 
-    public function getAutoComplete(Request $request)
+    public function autoComplete(Request $request)
     {
         $textQuery = $request->input('textQuery');
         $textQuery = '%'.$textQuery.'%'; // Add wildcards for partial matching
@@ -50,5 +46,12 @@ class SiteController extends Controller
             ->toArray();
 
         return response()->json($results);
+    }
+
+    public function top100List()
+    {
+        $alltop100 = Top100Highlights::get();
+
+        return response()->json($alltop100);
     }
 }

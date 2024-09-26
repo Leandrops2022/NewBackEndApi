@@ -10,7 +10,6 @@ Route::group([
     Route::get('/{slug}', [ActorController::class, 'show'])
         ->name('actor.show');
 
-
 });
 
 Route::group([

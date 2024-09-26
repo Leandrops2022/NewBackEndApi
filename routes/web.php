@@ -8,4 +8,3 @@ Route::get('/', function () {
 });
 
 Route::get('/account-activation', [AuthController::class, 'accountActivation'])->name('account.activation');
-

@@ -11,7 +11,7 @@ class ActivationToken extends Model
 
     protected $fillable = [
         'user_id',
-        'token'
+        'token',
     ];
 
     // protected $table = 'activation_tokens';

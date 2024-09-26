@@ -11,10 +11,6 @@
 |
 */
 
-use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\Route;
-
-
 require __DIR__.'/authApi.php';
 
 require __DIR__.'/siteApi.php';
