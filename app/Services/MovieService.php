@@ -18,8 +18,8 @@ class MovieService implements MovieServiceInterface
      */
     public function getMovieBySlugAndHighlights($slug): array
     {
-        $movie      = $this->movieRepository->getMovie($slug);
-        $highlights = $this->movieRepository->getMovieHighlights();
+        $movie      = $this->movieRepository->fetchMovie($slug);
+        $highlights = $this->movieRepository->fetchMovieHighlights();
 
         $data = [
             'movieData'  => $movie,

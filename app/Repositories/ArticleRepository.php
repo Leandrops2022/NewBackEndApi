@@ -10,15 +10,14 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class ArticleRepository implements ArticleRepositoryInterface
 {
-    public function getArticle($slug): Article
+    public function fetchArticle($slug): Article
     {
         $article = Article::where('slug', $slug)->firstOrFail(['imagem_capa', 'alt_capa', 'titulo', 'texto', 'trailer']);
 
         return $article;
-
     }
 
-    public function getAllArticles(): LengthAwarePaginator
+    public function fetchAllArticles(): LengthAwarePaginator
     {
         return Article::select('imagem_capa', 'alt_capa', 'titulo', 'texto', 'trailer')->orderBy('created_at')->paginate(10);
     }
@@ -26,11 +25,10 @@ class ArticleRepository implements ArticleRepositoryInterface
     /**
      * @return Collection<int, ArticleHighlights>
      */
-    public function getArticleHighlights(): Collection
+    public function fetchArticleHighlights(): Collection
     {
         $highlights = ArticleHighlights::inRandomOrder()->limit(4)->get();
 
         return $highlights;
-
     }
 }

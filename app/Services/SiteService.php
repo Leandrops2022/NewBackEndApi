@@ -24,7 +24,7 @@ class SiteService implements SiteServiceInterface
     public function getAutoComplete(Request $request): array
     {
         $textQuery = $request->input('textQuery');
-        $textQuery = '%'.$textQuery.'%';
+        $textQuery = '%' . $textQuery . '%';
 
         $results = $this->siteRepository->fetchAutoCompleteSuggestions($textQuery);
 

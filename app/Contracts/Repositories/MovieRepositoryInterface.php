@@ -8,11 +8,11 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 interface MovieRepositoryInterface
 {
-    public function getMovie($slug): Movie;
+    public function fetchMovie($slug): Movie;
 
-    public function getMoviesByIds(array $ids): Collection;
+    public function fetchMoviesByIds(array $ids): Collection;
 
-    public function getMovieHighlights(): Collection;
+    public function fetchMovieHighlights(): Collection;
 
-    public function getMoviesByName($movieName): LengthAwarePaginator;
+    public function fetchMoviesByName($movieName): LengthAwarePaginator;
 }

@@ -8,9 +8,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 interface ArticleRepositoryInterface
 {
-    public function getArticle($slug): Article;
+    public function fetchArticle($slug): Article;
 
-    public function getAllArticles(): LengthAwarePaginator;
+    public function fetchAllArticles(): LengthAwarePaginator;
 
-    public function getArticleHighlights(): Collection;
+    public function fetchArticleHighlights(): Collection;
 }

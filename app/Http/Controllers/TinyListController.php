@@ -22,6 +22,7 @@ class TinyListController extends Controller
     public function show($slug)
     {
         try {
+
             $data = $this->tinyListService->getTinyListAndHighlights($slug);
 
             return response()->json($data, 200);
@@ -34,6 +35,5 @@ class TinyListController extends Controller
 
             return response()->json($message, 500);
         }
-
     }
 }

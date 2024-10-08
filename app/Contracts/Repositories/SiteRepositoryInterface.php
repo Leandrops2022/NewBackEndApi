@@ -12,6 +12,4 @@ interface SiteRepositoryInterface
     public function fetchTopMoviesFromLastYear(): LengthAwarePaginator;
 
     public function fetchAutoCompleteSuggestions(string $query): array;
-
-    public function fetchAllTop100(): Collection;
 }

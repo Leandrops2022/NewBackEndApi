@@ -11,16 +11,16 @@
 |
 */
 
-require __DIR__.'/authApi.php';
+require __DIR__ . '/authApi.php';
 
-require __DIR__.'/siteApi.php';
+require __DIR__ . '/siteApi.php';
 
-require __DIR__.'/moviesApi.php';
+require __DIR__ . '/moviesApi.php';
 
-require __DIR__.'/articleApi.php';
+require __DIR__ . '/articleApi.php';
 
-require __DIR__.'/tinyListApi.php';
+require __DIR__ . '/tinyListApi.php';
 
-require __DIR__.'/top100Api.php';
+require __DIR__ . '/top100Api.php';
 
-require __DIR__.'/actorApi.php';
+require __DIR__ . '/actorApi.php';

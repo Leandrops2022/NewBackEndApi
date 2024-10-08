@@ -8,9 +8,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 interface TinyListRepositoryInterface
 {
-    public function getTinyList($slug): TinyList;
+    public function fetchTinyList($slug): TinyList;
 
-    public function getAllTinyLists(): LengthAwarePaginator;
+    public function fetchAllTinyLists(): LengthAwarePaginator;
 
-    public function getTinyListHighlights(): Collection;
+    public function fetchTinyListHighlights(): Collection;
 }

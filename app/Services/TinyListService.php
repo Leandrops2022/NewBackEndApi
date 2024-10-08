@@ -16,12 +16,14 @@ class TinyListService implements TinyListServiceInterface
 
     public function getTinyListAndHighlights($slug): array
     {
-        $tinyList   = $this->tinyListRepository->getTinyList($slug);
-        $highlights = $this->tinyListRepository->getTinyListHighlights();
+
+        $tinyList   = $this->tinyListRepository->fetchTinyList($slug);
+
+        $highlights = $this->tinyListRepository->fetchTinyListHighlights();
 
         $movie_ids = json_decode($tinyList->filmes_ids, true);
 
-        $movies = $this->movieRepository->getMoviesByIds($movie_ids);
+        $movies = $this->movieRepository->fetchMoviesByIds($movie_ids);
 
         $content = [
             'imgSrc'  => $tinyList->imagem_capa,
@@ -41,7 +43,7 @@ class TinyListService implements TinyListServiceInterface
 
     public function getAllTinyLists(): LengthAwarePaginator
     {
-        $tinyLists = $this->tinyListRepository->getAllTinyLists();
+        $tinyLists = $this->tinyListRepository->fetchAllTinyLists();
 
         return $tinyLists;
     }

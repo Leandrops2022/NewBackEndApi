@@ -11,15 +11,14 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class TinyListRepository implements TinyListRepositoryInterface
 {
-    public function getTinyList($slug): TinyList
+    public function fetchTinyList($slug): TinyList
     {
         $tinyList = TinyList::where('slug', $slug)->firstOrFail(['imagem_capa', 'alt_imagem_capa', 'titulo', 'texto', 'filmes_ids']);
 
         return $tinyList;
-
     }
 
-    public function getAllTinyLists(): LengthAwarePaginator
+    public function fetchAllTinyLists(): LengthAwarePaginator
     {
         $tinyLists = TinyList::paginate(10);
 
@@ -29,11 +28,10 @@ class TinyListRepository implements TinyListRepositoryInterface
     /**
      * @return Collection<int, TinyListHighlights>
      */
-    public function getTinyListHighlights(): Collection
+    public function fetchTinyListHighlights(): Collection
     {
         $highlights = TinyListHighlight::inRandomOrder()->limit(4)->get();
 
         return $highlights;
-
     }
 }

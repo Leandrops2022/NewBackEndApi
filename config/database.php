@@ -42,11 +42,7 @@ return [
         'mysql' => [
             'driver'         => 'mysql',
             'url'            => env('DB_URL'),
-            'host'           => 'srv728.hstgr.io',
-            'port'           => '3306',
-            'database'       => 'u255404056_ViGSr',
-            'username'       => 'u255404056_tjp6H',
-            'password'       => env('DB_PASSWORD'),
+
             'unix_socket'    => env('DB_SOCKET', ''),
             'charset'        => env('DB_CHARSET', 'utf8mb4'),
             'collation'      => env('DB_COLLATION', 'utf8mb4_unicode_ci'),

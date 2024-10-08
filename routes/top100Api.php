@@ -7,7 +7,9 @@ Route::group([
     'prefix' => 'top100',
 ], function () {
 
-    Route::get('/{slug}', [Top100Controller::class, 'show'])
-        ->name('top100.show');
+    Route::get('/', [Top100Controller::class, 'index']);
 
+    Route::get('/{slug}', [Top100Controller::class, 'getTop100Data']);
+
+    Route::get('/{slug}/texts', [Top100Controller::class, 'getTop100Text']);
 });

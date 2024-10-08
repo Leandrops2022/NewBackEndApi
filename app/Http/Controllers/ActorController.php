@@ -2,55 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\Repositories\ActorRepositoryInterface;
-use App\Http\Requests\StoreActorRequest;
-use App\Http\Requests\UpdateActorRequest;
-use App\Models\Actor;
+use App\Contracts\Services\ActorServiceInterface;
+use App\Contracts\Services\HandleErrorServiceInterface;
+use App\Http\Resources\ActorResource;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
 
 class ActorController extends Controller
 {
-    public function __construct(protected ActorRepositoryInterface $actorRepository) {}
+    public function __construct(protected ActorServiceInterface $actorService, protected HandleErrorServiceInterface $errorHandler) {}
 
-    public function store(StoreActorRequest $request)
+    public function show($slug)
     {
-        $validatedData = $request->validated();
-
         try {
-            $actor = $this->actorRepository->store($validatedData);
-
-            if (isset($actor)) {
-                return response()->json([
-                    'id' => $actor->id,
-                ], 201);
-            }
-
-            return response()->json('The operation failed', 500);
+            $data = new ActorResource($this->actorService->getActor($slug));
+            return ["actorData" => $data];
+        } catch (ModelNotFoundException $e) {
+            return response()->json($this->errorHandler->handleError($e), 400);
         } catch (Exception $e) {
-            Log::error('Error: '.$e->getMessage());
-
-            return response()->json('An error has ocurred', 500);
+            return response()->json($this->errorHandler->handleError($e), 500);
         }
-    }
-
-    public function show(Actor $actor)
-    {
-        //
-    }
-
-    public function edit(Actor $actor)
-    {
-        //
-    }
-
-    public function update(UpdateActorRequest $request, Actor $actor)
-    {
-        //
-    }
-
-    public function destroy(Actor $actor)
-    {
-        //
     }
 }

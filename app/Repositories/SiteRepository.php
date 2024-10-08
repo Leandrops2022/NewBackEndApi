@@ -22,7 +22,6 @@ class SiteRepository implements SiteRepositoryInterface
         return BestMoviesOfLastYear::select('titulo_portugues', 'rank', 'poster', 'duracao', 'ano_lancamento', 'nota', 'tagline', 'slug', 'genero')
             ->orderBy('rank', 'desc')
             ->paginate(10);
-
     }
 
     public function fetchAutoCompleteSuggestions($query): array
@@ -40,12 +39,5 @@ class SiteRepository implements SiteRepositoryInterface
             ->limit(10)
             ->get(['nome', 'rota', 'slug', 'tag'])
             ->toArray();
-    }
-
-    public function fetchAllTop100(): Collection
-    {
-        $alltop100 = Top100Highlights::get();
-
-        return $alltop100;
     }
 }

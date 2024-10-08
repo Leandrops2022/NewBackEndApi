@@ -14,8 +14,8 @@ class ArticleService implements ArticleServiceInterface
 
     public function getArticleAndHighlights($slug): array
     {
-        $article    = $this->articleRepository->getArticle($slug);
-        $highlights = $this->articleRepository->getArticleHighlights();
+        $article    = $this->articleRepository->fetchArticle($slug);
+        $highlights = $this->articleRepository->fetchArticleHighlights();
 
         $content = [
             'imgSrc'  => $article->imagem_capa,
@@ -35,7 +35,7 @@ class ArticleService implements ArticleServiceInterface
 
     public function getAllArticles(): LengthAwarePaginator
     {
-        $articles = $this->getAllArticles();
+        $articles = $this->articleRepository->fetchAllArticles();
 
         return $articles;
     }
