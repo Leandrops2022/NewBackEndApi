@@ -13,4 +13,6 @@ interface SiteServiceInterface
     public function getBestMoviesOfLastYear(): LengthAwarePaginator;
 
     public function getAutoComplete(Request $request): array;
+
+    public function getSearchData(string $slug): array;
 }

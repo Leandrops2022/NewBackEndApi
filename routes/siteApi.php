@@ -10,3 +10,5 @@ Route::get('/melhores-filmes-do-ano-passado', [SiteController::class, 'bestOfLas
 Route::post('/auto-complete', [SiteController::class, 'autoComplete']);
 
 Route::get('/nos-cinemas', [SiteController::class, 'nowPlaying']);
+
+Route::get('/busca/{slug}', [SiteController::class, 'SearchData']);

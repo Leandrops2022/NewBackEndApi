@@ -35,4 +35,20 @@ class SiteService implements SiteServiceInterface
     {
         return $this->siteRepository->fetchTopMoviesFromLastYear();
     }
+
+    public function getSearchData($slug): array
+    {
+        $textQuery = '%' . $slug . '%';
+        $results = $this->siteRepository->fetchSearchData($textQuery);
+
+        $data = $results->items();  // This gives the actual data items
+        $pagination = [
+            'current_page' => $results->currentPage(),
+            'last_page' => $results->lastPage(),
+            'per_page' => $results->perPage(),
+            'total' => $results->total(),
+        ];
+
+        return ['data' => $data, 'pagination' => $pagination];
+    }
 }

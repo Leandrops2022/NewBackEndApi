@@ -6,8 +6,11 @@ use App\Contracts\Services\SiteServiceInterface;
 use App\Models\Top100Highlights;
 use App\Services\TmdbService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+
+use function PHPUnit\Framework\isEmpty;
 
 class SiteController extends Controller
 {
@@ -33,5 +36,14 @@ class SiteController extends Controller
         $nowPlayingData = $this->tmdbService->getNowPlaying();
 
         return response()->json($nowPlayingData);
+    }
+
+    public function SearchData($slug)
+    {
+        if (empty($slug)) {
+            return response()->json(Response::HTTP_NOT_FOUND);
+        }
+
+        return response()->json($this->siteService->getSearchData($slug));
     }
 }
