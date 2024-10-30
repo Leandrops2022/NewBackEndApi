@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Contracts\Repositories\ActorRepositoryInterface;
 use App\Contracts\Repositories\ArticleRepositoryInterface;
 use App\Contracts\Repositories\MovieRepositoryInterface;
+use App\Contracts\Repositories\NewsRepositoryInterface;
 use App\Contracts\Repositories\SiteRepositoryInterface;
 use App\Contracts\Repositories\TinyListRepositoryInterface;
 use App\Contracts\Repositories\Top100RepositoryInterface;
@@ -13,6 +14,7 @@ use App\Contracts\Services\ArticleServiceInterface;
 use App\Contracts\Services\AuthServiceInterface;
 use App\Contracts\Services\HandleErrorServiceInterface;
 use App\Contracts\Services\MovieServiceInterface;
+use App\Contracts\Services\NewsServiceInterface;
 use App\Contracts\Services\SiteServiceInterface;
 use App\Contracts\Services\TinyListServiceInterface;
 use APP\Contracts\Services\TmdbServiceInterface;
@@ -20,6 +22,7 @@ use App\Contracts\Services\Top100ServiceInterface;
 use App\Repositories\ActorRepository;
 use App\Repositories\ArticleRepository;
 use App\Repositories\MovieRepository;
+use App\Repositories\NewsRepository;
 use App\Repositories\SiteRepository;
 use App\Repositories\TinyListRepository;
 use App\Repositories\Top100Repository;
@@ -28,6 +31,7 @@ use App\Services\ArticleService;
 use App\Services\AuthService;
 use App\Services\HandleErrorService;
 use App\Services\MovieService;
+use App\Services\NewsService;
 use App\Services\SiteService;
 use App\Services\TinyListService;
 use App\Services\TmdbService;
@@ -66,6 +70,9 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(ActorRepositoryInterface::class, ActorRepository::class);
         $this->app->bind(ActorServiceInterface::class, ActorService::class);
+
+        $this->app->bind(NewsRepositoryInterface::class, NewsRepository::class);
+        $this->app->bind(NewsServiceInterface::class, NewsService::class);
     }
 
     /**

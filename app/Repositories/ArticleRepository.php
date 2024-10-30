@@ -7,11 +7,14 @@ use App\Models\Article;
 use App\Models\ArticleHighlights;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 
 class ArticleRepository implements ArticleRepositoryInterface
 {
     public function fetchArticle($slug): Article
     {
+        //this is necessary because of hosting service recent changes to mysql
+        DB::statement("SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
         $article = Article::where('slug', $slug)->firstOrFail(['imagem_capa', 'alt_capa', 'titulo', 'texto', 'trailer']);
 
         return $article;
@@ -19,7 +22,9 @@ class ArticleRepository implements ArticleRepositoryInterface
 
     public function fetchAllArticles(): LengthAwarePaginator
     {
-        return Article::select('imagem_capa', 'alt_capa', 'titulo', 'texto', 'trailer')->orderBy('created_at')->paginate(10);
+        //this is necessary because of hosting service recent changes to mysql
+        DB::statement("SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+        return Article::select('imagem_capa as capa', 'alt_capa', 'titulo', 'summary as texto', 'trailer', 'tag', 'rota', 'slug')->orderBy('created_at')->paginate(10);
     }
 
     /**

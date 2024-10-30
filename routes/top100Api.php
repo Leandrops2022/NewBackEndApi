@@ -4,7 +4,7 @@ use App\Http\Controllers\Top100Controller;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
-    'prefix' => 'top100',
+    'prefix' => 'top100s',
 ], function () {
 
     Route::get('/', [Top100Controller::class, 'index']);

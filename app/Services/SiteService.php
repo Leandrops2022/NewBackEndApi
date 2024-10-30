@@ -35,9 +35,4 @@ class SiteService implements SiteServiceInterface
     {
         return $this->siteRepository->fetchTopMoviesFromLastYear();
     }
-
-    public function getTop100List(): Collection
-    {
-        return $this->siteRepository->fetchAllTop100();
-    }
 }

@@ -19,6 +19,8 @@ class SiteRepository implements SiteRepositoryInterface
 
     public function fetchTopMoviesFromLastYear(): LengthAwarePaginator
     {
+        //this is necessary because of hosting service recent changes to mysql
+        DB::statement("SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
         return BestMoviesOfLastYear::select('titulo_portugues', 'rank', 'poster', 'duracao', 'ano_lancamento', 'nota', 'tagline', 'slug', 'genero')
             ->orderBy('rank', 'desc')
             ->paginate(10);

@@ -7,7 +7,6 @@ use App\Contracts\Services\HandleErrorServiceInterface;
 use App\Http\Resources\ActorResource;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\Log;
 
 class ActorController extends Controller
 {

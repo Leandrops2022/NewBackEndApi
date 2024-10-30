@@ -24,6 +24,7 @@ use App\Models\Top100Thriller;
 use App\Models\Top100War;
 use App\Models\Top100Western;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 
 class Top100Repository implements Top100RepositoryInterface
 {
@@ -42,6 +43,10 @@ class Top100Repository implements Top100RepositoryInterface
     public function fetchTop100Data($slug): LengthAwarePaginator
     {
         $top100Model = $this->mapTop100Name($slug) ?? Top100Overall::class;
+
+        //this is necessary because of hosting service recent changes to mysql
+        DB::statement("SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+
         return $top100Model::select('poster', 'rank', 'nota', 'titulo_portugues', 'duracao', 'ano_lancamento', 'genero', 'tagline', 'slug')
             ->orderBy('rank', 'desc')
             ->paginate(10);
@@ -72,7 +77,7 @@ class Top100Repository implements Top100RepositoryInterface
             'suspense'          => Top100Thriller::class,
             'guerra'            => Top100War::class,
             'faroeste'          => Top100Western::class,
-            'geral'             => Top100Overall::class,
+            'melhores'          => Top100Overall::class,
 
         ];
 
