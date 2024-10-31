@@ -16,6 +16,7 @@ use App\Models\Top100Highlights;
 use App\Models\Top100Horror;
 use App\Models\Top100Musical;
 use App\Models\Top100Mystery;
+use App\Models\Top100OfLastYear;
 use App\Models\Top100Overall;
 use App\Models\Top100Romance;
 use App\Models\Top100ScienceFiction;
@@ -78,6 +79,7 @@ class Top100Repository implements Top100RepositoryInterface
             'guerra'            => Top100War::class,
             'faroeste'          => Top100Western::class,
             'melhores'          => Top100Overall::class,
+            'anopassado'        => Top100OfLastYear::class
 
         ];
 

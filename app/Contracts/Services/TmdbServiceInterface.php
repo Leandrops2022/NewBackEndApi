@@ -1,6 +1,6 @@
 <?php
 
-namespace APP\Contracts\Services;
+namespace App\Contracts\Services;
 
 interface TmdbServiceInterface
 {
