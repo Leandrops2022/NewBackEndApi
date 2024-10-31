@@ -17,7 +17,7 @@ use App\Contracts\Services\MovieServiceInterface;
 use App\Contracts\Services\NewsServiceInterface;
 use App\Contracts\Services\SiteServiceInterface;
 use App\Contracts\Services\TinyListServiceInterface;
-use APP\Contracts\Services\TmdbServiceInterface;
+use App\Contracts\Services\TmdbServiceInterface;
 use App\Contracts\Services\Top100ServiceInterface;
 use App\Repositories\ActorRepository;
 use App\Repositories\ArticleRepository;

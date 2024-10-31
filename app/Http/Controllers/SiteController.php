@@ -3,18 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Services\SiteServiceInterface;
-use App\Models\Top100Highlights;
-use App\Services\TmdbService;
+use App\Contracts\Services\TmdbServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-
-use function PHPUnit\Framework\isEmpty;
 
 class SiteController extends Controller
 {
-    public function __construct(private SiteServiceInterface $siteService, private TmdbService $tmdbService) {}
+    public function __construct(private SiteServiceInterface $siteService, private TmdbServiceInterface $tmdbService) {}
 
     public function home()
     {
