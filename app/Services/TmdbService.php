@@ -2,8 +2,7 @@
 
 namespace App\Services;
 
-use APP\Contracts\Services\TmdbServiceInterface;
-use App\Dtos\NowPlayingDTO;
+use App\Contracts\Services\TmdbServiceInterface;
 use Illuminate\Support\Facades\Http;
 
 class TmdbService implements TmdbServiceInterface
