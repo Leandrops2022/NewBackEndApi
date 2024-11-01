@@ -1,17 +1,17 @@
-<?php
+<!doctype html>
+<html lang="pt-Br">
 
-use Illuminate\Http\Request;
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image" href="/assets/favicon-DN_zoilZ.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TCFOfficial</title>
+  <script type="module" crossorigin src="/assets/index-Bxun31Uh.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CZJnX3Hg.css">
+</head>
 
-define('LARAVEL_START', microtime(true));
+<body>
+  <div id="root"></div>
+</body>
 
-// Determine if the application is in maintenance mode...
-if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
-    require $maintenance;
-}
-
-// Register the Composer autoloader...
-require __DIR__.'/../vendor/autoload.php';
-
-// Bootstrap Laravel and handle the request...
-(require_once __DIR__.'/../bootstrap/app.php')
-    ->handleRequest(Request::capture());
+</html>
