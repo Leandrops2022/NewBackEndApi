@@ -1,14 +1,14 @@
-name: Generate a build and push to another branch
+name: Generate a Full Laravel Project Build and Push
 
 on:
   push:
     branches:
-      - main # Trigger only on pushes to the main branch
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Build and Push Laravel Project
+    name: Build and Push Full Laravel Project
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -16,7 +16,7 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3.1' # or the PHP version your project requires
+          php-version: '8.3.1' # or the required PHP version
 
       - name: Install Composer dependencies
         run: composer install --no-dev --optimize-autoloader
@@ -27,16 +27,12 @@ jobs:
           php artisan route:cache
           php artisan view:cache
 
-      - name: Install Node.js dependencies and build assets
-        run: |
-          npm install
-          npm run build # Adjust if your Laravel app has a custom build script
-
-      - name: Push built assets to another branch
-        uses: s0/git-publish-subdir-action@develop
+      - name: Commit and push to build branch
         env:
-          REPO: self
-          BRANCH: build # Target branch to push assets
-          FOLDER: . # Assuming built files are in Laravel's public directory
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MESSAGE: "Build: ({sha}) {msg}"
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add -A
+          git commit -m "Full Project Deployment: $(date +'%Y-%m-%d %H:%M:%S')"
+          git push -f origin HEAD:build
