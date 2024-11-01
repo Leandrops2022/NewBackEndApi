@@ -12,7 +12,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $email    = env('ADMIN_EMAIL');
+        $email    = 'Test';
         $password = env('ADMIN_PASSWORD');
         $admin    = User::create([
             'name'     => 'Admin',
