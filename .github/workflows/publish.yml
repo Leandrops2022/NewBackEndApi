@@ -1,0 +1,42 @@
+name: Generate a build and push to another branch
+
+on:
+  push:
+    branches:
+      - main # Trigger only on pushes to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build and Push Laravel Project
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3.1' # or the PHP version your project requires
+
+      - name: Install Composer dependencies
+        run: composer install --no-dev --optimize-autoloader
+
+      - name: Generate Laravel build files
+        run: |
+          php artisan config:cache
+          php artisan route:cache
+          php artisan view:cache
+
+      - name: Install Node.js dependencies and build assets
+        run: |
+          npm install
+          npm run build # Adjust if your Laravel app has a custom build script
+
+      - name: Push built assets to another branch
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: build # Target branch to push assets
+          FOLDER: public # Assuming built files are in Laravel's public directory
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MESSAGE: "Build: ({sha}) {msg}"
