@@ -4,7 +4,7 @@ use App\Http\Controllers\ActorController;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
-    'prefix' => 'ator',
+    'prefix' => 'atores',
 ], function () {
 
     Route::get('/{slug}', [ActorController::class, 'show'])

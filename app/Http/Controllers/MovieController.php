@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Services\HandleErrorServiceInterface;
 use App\Contracts\Services\MovieServiceInterface;
-use APP\Contracts\Services\TmdbServiceInterface;
+use App\Contracts\Services\TmdbServiceInterface;
 use App\Http\Resources\MovieResource;
 
 class MovieController extends Controller

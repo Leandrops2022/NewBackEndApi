@@ -3,9 +3,8 @@
 namespace App\Repositories;
 
 use App\Contracts\Repositories\SiteRepositoryInterface;
-use App\Models\BestMoviesOfLastYear;
 use App\Models\GeneralHighlights;
-use App\Models\Top100Highlights;
+use App\Models\Top100OfLastYear;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +20,7 @@ class SiteRepository implements SiteRepositoryInterface
     {
         //this is necessary because of hosting service recent changes to mysql
         DB::statement("SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
-        return BestMoviesOfLastYear::select('titulo_portugues', 'rank', 'poster', 'duracao', 'ano_lancamento', 'nota', 'tagline', 'slug', 'genero')
+        return Top100OfLastYear::select('titulo_portugues', 'rank', 'poster', 'duracao', 'ano_lancamento', 'nota', 'tagline', 'slug', 'genero')
             ->orderBy('rank', 'desc')
             ->paginate(10);
     }
