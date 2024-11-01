@@ -37,6 +37,6 @@ jobs:
         env:
           REPO: self
           BRANCH: build # Target branch to push assets
-          FOLDER: public # Assuming built files are in Laravel's public directory
+          FOLDER: . # Assuming built files are in Laravel's public directory
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MESSAGE: "Build: ({sha}) {msg}"
