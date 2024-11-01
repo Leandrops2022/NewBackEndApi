@@ -9,6 +9,7 @@ use App\Models\Top100Animation;
 use App\Models\Top100Classics;
 use App\Models\Top100Comedy;
 use App\Models\Top100Crime;
+use App\Models\Top100Documentary;
 use App\Models\Top100Drama;
 use App\Models\Top100Family;
 use App\Models\Top100Fantasy;
@@ -44,7 +45,6 @@ class Top100Repository implements Top100RepositoryInterface
     public function fetchTop100Data($slug): LengthAwarePaginator
     {
         $top100Model = $this->mapTop100Name($slug) ?? Top100Overall::class;
-
         //this is necessary because of hosting service recent changes to mysql
         DB::statement("SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
 
@@ -79,7 +79,8 @@ class Top100Repository implements Top100RepositoryInterface
             'guerra'            => Top100War::class,
             'faroeste'          => Top100Western::class,
             'melhores'          => Top100Overall::class,
-            'anopassado'        => Top100OfLastYear::class
+            'anopassado'        => Top100OfLastYear::class,
+            'documentario'      => Top100Documentary::class,
 
         ];
 
