@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('cors');
 
 Route::get('/account-activation', [AuthController::class, 'accountActivation'])->name('account.activation');
 
