@@ -11,6 +11,28 @@
 |
 */
 
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
+
+
+Route::get('/policy', function () {
+    $markdown = File::get(resource_path('markdown/policy.md'));
+
+    $policyHtml = Str::markdown($markdown);
+
+    return response()->json($policyHtml);
+});
+
+Route::get('/terms', function () {
+    $markdown = File::get(resource_path('markdown/terms.md'));
+
+    $termsHtml = Str::markdown($markdown);
+
+    return response()->json($termsHtml);
+});
+
+
 require __DIR__ . '/authApi.php';
 
 require __DIR__ . '/siteApi.php';
