@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
+Route::get('/test', function () {
+    return response()->json('connection test passed');
+});
 
 Route::get('/policy', function () {
     $markdown = File::get(resource_path('markdown/policy.md'));
