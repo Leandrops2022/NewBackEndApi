@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 Route::get('/test', function () {
-    return response()->json('connection test passed');
+    return response()->json('connection test passed!');
 });
 
 Route::get('/policy', function () {
