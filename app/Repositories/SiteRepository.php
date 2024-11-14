@@ -13,7 +13,7 @@ class SiteRepository implements SiteRepositoryInterface
 {
     public function fetchHomepageHighlights(): Collection
     {
-        return GeneralHighlights::inRandomOrder()->limit(8)->get();
+        return GeneralHighlights::limit(8)->get();
     }
 
     public function fetchTopMoviesFromLastYear(): LengthAwarePaginator
