@@ -25,7 +25,7 @@ class NewsRepository implements NewsRepositoryInterface
     {
         //this is necessary because of hosting service recent changes to mysql
         DB::statement("SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
-        return News::select('imagem_capa as capa', 'alt_capa', 'titulo', 'summary as texto', 'trailer', 'tag', 'rota', 'slug')->orderBy('created_at', 'desc')->paginate(10);
+        return News::select('imagem_capa as capa', 'alt_capa', 'titulo', 'summary', 'trailer', 'tag', 'rota', 'slug')->orderBy('created_at', 'desc')->paginate(10);
     }
 
     /**

@@ -20,7 +20,7 @@ class TinyListRepository implements TinyListRepositoryInterface
 
     public function fetchAllTinyLists(): LengthAwarePaginator
     {
-        $tinyLists = TinyList::select('imagem_capa as capa', 'alt_imagem_capa', 'titulo', 'summary as texto', 'tag', 'rota', 'slug')->orderBy('created_at')->paginate(10);
+        $tinyLists = TinyList::select('imagem_capa as capa', 'alt_imagem_capa', 'titulo', 'summary', 'tag', 'rota', 'slug')->orderBy('created_at')->paginate(10);
 
         return $tinyLists;
     }
