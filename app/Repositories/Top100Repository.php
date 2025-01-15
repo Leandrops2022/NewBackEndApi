@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Contracts\Repositories\Top100RepositoryInterface;
+use App\Models\Movie;
 use App\Models\Top100Action;
 use App\Models\Top100Adventure;
 use App\Models\Top100Animation;
@@ -25,6 +26,7 @@ use App\Models\Top100Text;
 use App\Models\Top100Thriller;
 use App\Models\Top100War;
 use App\Models\Top100Western;
+use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
@@ -42,15 +44,30 @@ class Top100Repository implements Top100RepositoryInterface
         return Top100Highlights::inRandomOrder()->limit(4)->get();
     }
 
-    public function fetchTop100Data($slug): LengthAwarePaginator
+    public function fetchTop100Data($slug)
     {
-        $top100Model = $this->mapTop100Name($slug) ?? Top100Overall::class;
+        $genderId = $this->mapTop100Name($slug) ?? 2;
         //this is necessary because of hosting service recent changes to mysql
         DB::statement("SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
 
-        return $top100Model::select('poster', 'rank', 'nota', 'titulo_portugues', 'duracao', 'ano_lancamento', 'genero', 'tagline', 'slug')
-            ->orderBy('rank', 'desc')
-            ->paginate(10);
+        $query = match ($genderId) {
+            1       => $this->fetchTop100ClassicMovies(),
+            2       => $this->fetchTop100BestMovies(),
+            3       => $this->fetchTop100LastYearMovies(),
+            default => $this->fetchDefaultTop100($genderId),
+        };
+        $results = $query->orderBy('rank', 'asc')->limit(100)->get();
+
+        $paginatedMovies = new \Illuminate\Pagination\LengthAwarePaginator(
+            $results->reverse()->forPage(request()->input('page', 1), 10),
+            100,
+            10,
+            request()->input('page', 1),
+            ['path' => url()->current()]
+        );
+
+        return $paginatedMovies;
+
     }
 
     public function fetchTop100Text($slug)
@@ -61,26 +78,26 @@ class Top100Repository implements Top100RepositoryInterface
     private function mapTop100Name($slug)
     {
         $modelMapping = [
-            'acao'              => Top100Action::class,
-            'aventura'          => Top100Adventure::class,
-            'animacao'          => Top100Animation::class,
-            'filmesclassicos'   => Top100Classics::class,
-            'comedia'           => Top100Comedy::class,
-            'crime'             => Top100Crime::class,
-            'drama'             => Top100Drama::class,
-            'familia'           => Top100Family::class,
-            'fantasia'          => Top100Fantasy::class,
-            'terror'            => Top100Horror::class,
-            'musical'           => Top100Musical::class,
-            'misterio'          => Top100Mystery::class,
-            'romance'           => Top100Romance::class,
-            'ficcaocientifica'  => Top100ScienceFiction::class,
-            'suspense'          => Top100Thriller::class,
-            'guerra'            => Top100War::class,
-            'faroeste'          => Top100Western::class,
-            'melhores'          => Top100Overall::class,
-            'anopassado'        => Top100OfLastYear::class,
-            'documentario'      => Top100Documentary::class,
+            'acao'              => 28,
+            'aventura'          => 12,
+            'animacao'          => 16,
+            'filmesclassicos'   => 1,
+            'comedia'           => 35,
+            'crime'             => 80,
+            'drama'             => 18,
+            'familia'           => 10751,
+            'fantasia'          => 14,
+            'terror'            => 27,
+            'musical'           => 10402,
+            'misterio'          => 9648,
+            'romance'           => 10749,
+            'ficcaocientifica'  => 878,
+            'suspense'          => 53,
+            'guerra'            => 10752,
+            'faroeste'          => 37,
+            'melhores'          => 2,
+            'anopassado'        => 3,
+            'documentario'      => 99,
 
         ];
 
@@ -88,5 +105,35 @@ class Top100Repository implements Top100RepositoryInterface
             return $modelMapping[$slug];
         }
         return null;
+    }
+
+    private function baseQuery() {
+
+        return Movie::select('poster', 'nota', 'titulo_portugues', 'duracao', 'ano_lancamento', 'genres', 'tagline', 'slug',
+            DB::raw('ROW_NUMBER() OVER (ORDER BY nota DESC) AS rank'))
+            ->where('quantidade_de_votos', '>', 2000)
+            ->where('nota', '>', 7);
+    }
+
+    private function fetchDefaultTop100($genreId) {
+        return $this->baseQuery()
+            ->where(function ($query) use ($genreId) {
+                $query->where('genero_1',$genreId)
+                    ->orWhere('genero_2', $genreId)
+                    ->orWhere('genero_3', $genreId);
+            });
+
+    }
+
+    private function fetchTop100ClassicMovies() {
+        return $this->baseQuery()->where('ano_lancamento','<', 2005);
+    }
+
+    private function fetchTop100BestMovies() {
+        return $this->baseQuery();
+    }
+
+    private function fetchTop100LastYearMovies() {
+        return $this->baseQuery()->where('ano_lancamento', '=', now()->subYear()->year);
     }
 }

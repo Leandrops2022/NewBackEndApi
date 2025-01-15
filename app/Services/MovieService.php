@@ -36,7 +36,7 @@ class MovieService implements MovieServiceInterface
      */
     public function searchMovie($movieName): LengthAwarePaginator
     {
-        $movies = $this->movieRepository->getMoviesByName($movieName);
+        $movies = $this->movieRepository->fetchMoviesByName($movieName);
 
         return $movies;
     }
