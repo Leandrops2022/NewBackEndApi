@@ -4,29 +4,11 @@ namespace App\Repositories;
 
 use App\Contracts\Repositories\Top100RepositoryInterface;
 use App\Models\Movie;
-use App\Models\Top100Action;
-use App\Models\Top100Adventure;
-use App\Models\Top100Animation;
-use App\Models\Top100Classics;
-use App\Models\Top100Comedy;
-use App\Models\Top100Crime;
-use App\Models\Top100Documentary;
-use App\Models\Top100Drama;
-use App\Models\Top100Family;
-use App\Models\Top100Fantasy;
+
 use App\Models\Top100Highlights;
-use App\Models\Top100Horror;
-use App\Models\Top100Musical;
-use App\Models\Top100Mystery;
-use App\Models\Top100OfLastYear;
-use App\Models\Top100Overall;
-use App\Models\Top100Romance;
-use App\Models\Top100ScienceFiction;
+
 use App\Models\Top100Text;
-use App\Models\Top100Thriller;
-use App\Models\Top100War;
-use App\Models\Top100Western;
-use Carbon\Carbon;
+
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
